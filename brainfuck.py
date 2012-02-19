@@ -3,16 +3,16 @@
 import sys
 
 
-#initially, just prcess symbols from stdin until an exit symbol is read
-def run(stream):
+
+
+def run(instr):
 	tape = [0]
 	head = 0
 	iptr = 0
 	keepAlive = True
-	while(keepAlive):
-		output = ''
+	symbol = instr[0]
+	while(keepAlive and symbol):
 		#sys.stdout.write('> ')
-		symbol = raw_input('> ')
 		#print len(symbol)
 		#symbol = symbol[2:-1]		
 		#print symbol
@@ -38,15 +38,33 @@ def run(stream):
 			sys.stdout.write(c)
 		elif(symbol == ','):
 			c = raw_input()
-			tape[head] = ord(c)		
+			tape[head] = ord(c)
+		elif(symbol == '['):
+			if(tape[head] == 0):
+				while(symbol != ']'):
+					iptr += 1
+					symbol = instr[ptr]
+		elif(symbol == ']'):
+			if(tape[head] != 0):
+				while(symbol != '['):
+					iptr -= 1
+					symbol = instr[iptr]					
 		elif(symbol == 'x'):
 			keepAlive = False
 		else:		
-			print 'Symbol not recognized'
+			print 'Symbol not recognized, ignoring'
+		iptr += 1
+		if(iptr == len(instr)):
 			keepAlive = False
-		iptr += 1		
-		print tape
+		else:
+			symbol = instr[iptr]		
+		#print tape
 
 
-run(sys.stdin)
+f = open('hello.txt','r')
+instructions = []
+for byte in f.read():
+	instructions.append(byte)
+#print instructions
+run(instructions)
 
