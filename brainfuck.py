@@ -43,28 +43,27 @@ def run(instr):
 			if(tape[head] == 0):
 				while(symbol != ']'):
 					iptr += 1
-					symbol = instr[ptr]
+					symbol = instr[iptr]
 		elif(symbol == ']'):
 			if(tape[head] != 0):
 				while(symbol != '['):
 					iptr -= 1
 					symbol = instr[iptr]					
-		elif(symbol == 'x'):
-			keepAlive = False
-		else:		
-			print 'Symbol not recognized, ignoring'
+		#else:		
+			#print 'Symbol not recognized, ignoring'
+			#iptr -= 1
 		iptr += 1
 		if(iptr == len(instr)):
 			keepAlive = False
 		else:
 			symbol = instr[iptr]		
-		#print tape
+		sys.stderr.write(tape)
 
 
 f = open('hello.txt','r')
 instructions = []
 for byte in f.read():
 	instructions.append(byte)
-#print instructions
+print instructions
 run(instructions)
 
