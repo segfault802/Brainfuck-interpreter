@@ -56,8 +56,7 @@ def run(instr):
 		if(iptr == len(instr)):
 			keepAlive = False
 		else:
-			symbol = instr[iptr]		
-		sys.stderr.write(tape)
+			symbol = instr[iptr]
 
 
 f = open('hello.txt','r')

@@ -1,0 +1,5 @@
+
+
+Currently this only works with the *unformatted* hello world program on 
+wikipedia.  It *should* ignore all non recognized symbols in the formatted
+version, but it doesn't and I haven't had time to debug it yet.
